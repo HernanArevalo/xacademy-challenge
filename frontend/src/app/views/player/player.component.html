@@ -1,0 +1,63 @@
+<div class="player-container">
+  <div class="header-section">
+    <h2 class="overview-title">OVERVIEW</h2>
+
+    <div class="header-buttons">
+      <button type="button" class="header-button edit">Edit Player</button>
+      <button type="button" class="header-button create">
+        Create Your Player
+      </button>
+    </div>
+  </div>
+
+  <section class="player-section">
+    <div class="general-information">
+      <div class="stats personal-information">
+        <div class="picture-and-number">
+          <div class="picture">
+            <img
+              [src]="player.player_face_url"
+              alt="player-picture"
+              class="player-img"
+            />
+          </div>
+          <span class="number">{{ this.player.club_jersey_number }}</span>
+        </div>
+        <div class="data">
+          <h2 class="player-name">{{ this.player.long_name }}</h2>
+          <div class='version'>
+            <span>FIFA {{this.player.fifa_version}}</span>
+          </div>
+
+          <div class="data-items">
+            <div class="data-item">
+              <span>Position</span>
+              <h5>{{ this.player.club_position }}</h5>
+            </div>
+            <div class="data-item">
+              <span>Nationality</span>
+              <h5>{{ this.player.nationality_name }}</h5>
+            </div>
+            <div class="data-item">
+              <span>Height</span>
+              <h5>{{ this.player.height_cm }} cm</h5>
+            </div>
+            <div class="data-item">
+              <span>Weight</span>
+              <h5>{{ this.player.weight_kg }} kg</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="stats general-stats">
+        <app-radar-chart [data]="generalStats"/>
+      </div>
+      <!-- <div class="stats attack-stats">
+        <app-radar-chart [data]="generalStats"/>
+      </div>
+      <div class="stats defense-stats">
+        <app-radar-chart [data]="defenseStats"/>
+      </div> -->
+    </div>
+  </section>
+</div>
