@@ -1,10 +1,14 @@
+*{
+  --light-gray: #eeeeee;
+  --dark-gray: #7a7a7a;
+}
 body{
   color: #161629;
-  background-color: #eeeeee;
+  background-color: var(--light-gray);
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  width: 100vw;
+  width: 100%;
   padding: 0;
   margin: 0;
 }
