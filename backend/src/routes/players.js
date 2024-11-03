@@ -18,8 +18,8 @@ router.get("/:genre/:id", async(req, res) => {
   const {genre, id} = req.params;
 
   try {
-    const players = await playerService.getPlayer(genre, id)
-    res.status(200).json({ok: true, players})
+    const player = await playerService.getPlayer(genre, id)
+    res.status(200).json({ok: true, player})
     } catch (error) {
     res.status(500).json({ok: false, message: error.message})
   }
