@@ -70,13 +70,29 @@ const getPlayers = async (genre, page = 1, limit = 20, filters) => {
     throw new Error(error);
   }
 };
+
+const getClubs = async (genre) => {
+  try {
+    let clubs = [];
+    
+    if (genre === 'female') {
+      clubs = await FemalePlayer.findAll({
+        attributes: [[Sequelize.fn('DISTINCT', Sequelize.col('club_name')), 'club_name']],
+        raw: true,
+      });
+    } else {
+      clubs = await MalePlayer.findAll({
+        attributes: [[Sequelize.fn('DISTINCT', Sequelize.col('club_name')), 'club_name']],
+        raw: true,
       });
     }
 
-    if (users) {
-      return users;
-    }else{
-      throw new Error(`Users not found`);
+    return clubs.map(club => club.club_name).sort((a, b) => a.localeCompare(b));
+  } catch (error) {
+    console.error('Error fetching unique club names:', error);
+    throw new Error(error);
+  }
+};
     }
   }catch (error){
     throw new Error(error);
