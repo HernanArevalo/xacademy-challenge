@@ -1,27 +1,24 @@
 import { Routes } from '@angular/router';
-import { FemalePlayersComponent, MalePLayersComponent, PlayerComponent } from './views';
+import { PlayersComponent, PlayerComponent } from './views';
 
 export const routes: Routes = [
-  { path: 'landing', 
-    component: MalePLayersComponent
+  { 
+    path: 'players/:genre', 
+    component: PlayersComponent,
+    title: `Players | PlayME`
   },
-  { path: 'players/male', 
-    component: MalePLayersComponent
-  },
-  { path: 'players/female', 
-    component: FemalePlayersComponent
-  },
-  { path: 'player/:player_id/:fifa_version', 
+  { 
+    path: 'players/:genre/:player_id/:fifa_version', 
     component: PlayerComponent
   },
-  { path: '', 
-    redirectTo: '/landing',
+  { 
+    path: '', 
+    redirectTo: 'players/male',
     pathMatch: 'full'
   },
-  { path: '**', 
-    redirectTo: '/landing',
-    pathMatch: 'full'
-        
-  },
-
+  { 
+    path: '**', 
+    redirectTo: 'players/male', 
+    pathMatch: 'full' 
+  }
 ];
