@@ -27,20 +27,49 @@ const getPlayer = async(id, genre) => {
   }
 };
 
-const getPlayers = async(genre, page=1, limit=20) => {
-  console.log({genre, page, limit});
-  try{
-    const offset= (page-1) * limit
-    let users = [];
-    if (genre == 'female') {
-      users = await FemalePlayer.findAll({
-        limit:20,
-        offset: offset
-      });
-    }else{
-      users = await MalePlayer.findAll({
-        limit:20,
-        offset: offset
+const getPlayers = async (genre, page = 1, limit = 20, filters) => {
+  console.log({genre, page, limit, filters});
+  const offset = (page - 1) * limit;
+  try {
+    let whereClause = {};
+
+    if (filters.club_name) {
+      whereClause.club_name = filters.club_name;
+    }
+    if (filters.nationality_name) {
+      whereClause.nationality_name = filters.nationality_name;
+    }
+    if (filters.fifa_version) {
+      whereClause.fifa_version = filters.fifa_version;
+    }
+    if (filters.player_positions) {
+      whereClause.player_positions = {
+        [Op.like]: `%${filters.player_positions}%`
+      };
+    }
+
+    let players;
+    const playerModel = genre === 'female' ? FemalePlayer : MalePlayer;
+
+    players = await playerModel.findAll({
+      where: whereClause,
+      order: [
+        ['fifa_version', 'DESC'],
+        ['overall', 'DESC']
+      ],
+      limit: Number(limit),
+      offset: Number(offset)
+    });
+
+    if (players) {
+      return players;
+    } else {
+      throw new Error('Players not found');
+    }
+  } catch (error) {
+    throw new Error(error);
+  }
+};
       });
     }
 
