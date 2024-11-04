@@ -1,4 +1,5 @@
 const { FemalePlayer, MalePlayer } = require("../models");
+const { Sequelize } = require('sequelize');
 
 const createPlayer = async (userOptions)=>{
   try{
