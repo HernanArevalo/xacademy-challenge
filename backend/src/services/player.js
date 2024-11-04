@@ -4,10 +4,15 @@ const getPlayer = async(genre, id) => {
   return await playerProvider.getPlayer(id, genre)
 };
 
-const getPlayers = async(genre, page, limit) => {
-  return await playerProvider.getPlayers(genre, page, limit)
+const getPlayers = async(genre, page, limit, filters) => {
+  return await playerProvider.getPlayers(genre, page, limit, filters)
 };
-
+const getClubs = async(genre) => {
+  return await playerProvider.getClubs(genre)
+};
+const getNations = async(genre) => {
+  return await playerProvider.getNations(genre)
+};
 const createPlayer = async(player) => {
   return await playerProvider.createPlayer(player)
 };
@@ -20,4 +25,4 @@ const deletePlayer = async(id) => {
   return await playerProvider.deletePlayer(id)
 }
 
-module.exports = { getPlayer, getPlayers, createPlayer, updatePlayer, deletePlayer };
+module.exports = { getPlayer, getPlayers, getClubs, getNations, createPlayer, updatePlayer, deletePlayer };
