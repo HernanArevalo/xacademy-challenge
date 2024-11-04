@@ -4,10 +4,10 @@ const router = express.Router();
 
 router.get("/:genre", async(req, res) => {
   const genre = req.params.genre;
-  const { page, limit } = req.query;
+  const { page, limit, ...rest } = req.query;
 
   try {
-    const players = await playerService.getPlayers(genre, page, limit)
+    const players = await playerService.getPlayers(genre, page, limit, rest)
     res.status(200).json({ok: true, players})
     } catch (error) {
     res.status(500).json({ok: false, message: error.message})
