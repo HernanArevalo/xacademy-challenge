@@ -144,6 +144,8 @@ module.exports = {
   createPlayer,
   getPlayer,
   getPlayers,
+  getClubs,
+  getNations,
   updateUser,
   deleteUser
 }
