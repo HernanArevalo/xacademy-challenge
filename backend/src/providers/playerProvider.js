@@ -93,8 +93,25 @@ const getClubs = async (genre) => {
     throw new Error(error);
   }
 };
+const getNations = async (genre) => {
+  try {
+    let nations = [];
+    
+    if (genre === 'female') {
+      nations = await FemalePlayer.findAll({
+        attributes: [[Sequelize.fn('DISTINCT', Sequelize.col('nationality_name')), 'nationality_name']],
+        raw: true,
+      });
+    } else {
+      nations = await MalePlayer.findAll({
+        attributes: [[Sequelize.fn('DISTINCT', Sequelize.col('nationality_name')), 'nationality_name']],
+        raw: true,
+      });
     }
-  }catch (error){
+
+    return nations.map(nation => nation.nationality_name).sort((a, b) => a.localeCompare(b));
+  } catch (error) {
+    console.error('Error fetching unique club names:', error);
     throw new Error(error);
   }
 };
