@@ -21,18 +21,18 @@
               class="player-img"
             />
           </div>
-          <span class="number">{{ this.player.club_jersey_number }}</span>
+          <span class="number">{{ this.player.overall }}</span>
         </div>
         <div class="data">
           <h2 class="player-name">{{ this.player.long_name }}</h2>
           <div class='version'>
-            <span>FIFA {{this.player.fifa_version}}</span>
+            <span>20{{this.player.fifa_version}}</span>
           </div>
 
           <div class="data-items">
             <div class="data-item">
               <span>Position</span>
-              <h5>{{ this.player.club_position }}</h5>
+              <h5>{{ this.player.player_positions }}</h5>
             </div>
             <div class="data-item">
               <span>Nationality</span>
