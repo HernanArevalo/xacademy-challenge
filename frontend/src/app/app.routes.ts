@@ -8,7 +8,7 @@ export const routes: Routes = [
     title: `Players | PlayME`
   },
   { 
-    path: 'players/:genre/:player_id/:fifa_version', 
+    path: 'players/:genre/:player_id', 
     component: PlayerComponent
   },
   { 
