@@ -1,0 +1,45 @@
+<button class="filter-btn" type="button">
+  Filter
+  <i class="material-icons">filter_alt</i>
+</button>
+
+<form [formGroup]="filterForm">
+  <label for="position-select">Position:</label>
+  <select formControlName="player_position" id="position-select">
+    <option value="">-</option>
+    <optgroup *ngFor="let group of getPlayerPositionEntries()" [label]="group[0]">
+      <option *ngFor="let position of group[1]" [value]="position">{{ position }}</option>
+    </optgroup>
+  </select>
+
+  <label for="clubs">Club:</label>
+  <select formControlName="club_name" id="clubs-select">
+    <option value="">-</option>
+    <ng-container *ngFor="let letter of club_name | keyvalue: keyComparator">
+      <optgroup [label]="letter.key">
+        <option *ngFor="let club of letter.value" [value]="club">{{ club }}</option>
+      </optgroup>
+    </ng-container>
+  </select>
+
+  <label for="nations">Nation:</label>
+  <select formControlName="nationality_name" id="nations-select">
+    <option value="">-</option>
+    <ng-container *ngFor="let letter of nationality_name | keyvalue: keyComparator">
+      <optgroup [label]="letter.key">
+        <option *ngFor="let nation of letter.value" [value]="nation">{{ nation }}</option>
+      </optgroup>
+    </ng-container>
+  </select>
+
+  <label for="fifa-select">FIFA version:</label>
+  <select formControlName="fifa_version" id="fifa-select">
+    <option value="">-</option>
+    <option *ngFor="let version of fifa_versions" [value]="version">20{{ version }}</option>
+  </select>
+
+  <button class="search-btn" type="button" (click)="onSearch()">
+    Search
+    <i class="material-icons">search</i>
+  </button>
+</form>
