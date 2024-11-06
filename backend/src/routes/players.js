@@ -14,11 +14,11 @@ router.get("/:genre", async(req, res) => {
   }
 });
 
-router.get("/:genre/:id", async(req, res) => {
-  const {genre, id} = req.params;
+router.get("/:genre/:player_id", async(req, res) => {
+  const {genre, player_id} = req.params;
 
   try {
-    const player = await playerService.getPlayer(genre, id)
+    const player = await playerService.getPlayer(genre, player_id)
     res.status(200).json({ok: true, player})
     } catch (error) {
     res.status(500).json({ok: false, message: error.message})
