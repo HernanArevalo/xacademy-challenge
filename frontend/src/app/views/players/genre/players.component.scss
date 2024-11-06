@@ -1,0 +1,141 @@
+:host {
+  display: flex;
+  justify-content: center;
+}
+
+.players-container {
+  width: 900px;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 30px 10px;
+  text-align: start;
+}
+
+h1 {
+  text-align: start;
+  width: 100%;
+  margin: 0;
+}
+
+ul {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.load-btn {
+  background-color: black;
+  color: white;
+  padding: 10px 20px;
+  outline: none;
+  border: none;
+  border-radius: 15px;
+  transition: all 0.6s ease;
+  cursor: pointer;
+}
+.load-btn:hover {
+  background-color: rgb(88, 88, 88);
+  color: white;
+}
+
+//* player data
+li{
+  list-style: none;
+
+}
+.player-item {
+  list-style: none;
+  background-color: white;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  width: 100%;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  padding: 20px 30px;
+  text-decoration: none;
+  color: var(--black);
+}
+
+.player-info {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.player-item:hover{
+  gap: 20px;
+  padding: 30px 30px;
+}
+
+.player-item:hover .player-info {
+  max-height: 100px;
+}
+
+.player-top{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+}
+.player-overall{
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.player-name{
+  margin: 0;
+  font-size: 20px;
+}
+.player-name > span{
+  color: var(--dark-gray);
+}
+
+.player-picture{
+  background-color: var(--light-gray);
+  width: fit-content;
+  border-radius: 999px;
+  overflow: hidden;
+
+}
+
+.player-picture > img{
+  width: 94px;
+  position: relative;
+  top: 5px;
+}
+
+.data-items{
+  display: grid;
+  column-gap: 25px;
+  row-gap: 10px;
+  grid-template-columns: repeat(3, auto);
+  justify-content: space-between;
+}
+
+.data-item{
+  display: flex;
+  flex-direction: column;
+}
+
+.data-item > span{
+  color: var(--dark-gray);
+  font-size: 15px;
+}
+.data-item > h5{
+  margin: 0;
+  font-size: 18px;
+}
+.data-item.age{
+  grid-column: 1;
+}
