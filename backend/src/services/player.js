@@ -1,7 +1,7 @@
 const playerProvider = require('../providers/playerProvider');
 
-const getPlayer = async(genre, id) => {
-  return await playerProvider.getPlayer(id, genre)
+const getPlayer = async(genre, player_id) => {
+  return await playerProvider.getPlayer(genre, player_id)
 };
 
 const getPlayers = async(genre, page, limit, filters) => {
