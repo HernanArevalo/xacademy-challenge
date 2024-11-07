@@ -1,11 +1,6 @@
-<button class="filter-btn" type="button">
-  Filter
-  <i class="material-icons">filter_alt</i>
-</button>
-
 <form [formGroup]="filterForm">
   <label for="position-select">Position:</label>
-  <select formControlName="player_position" id="position-select">
+  <select formControlName="player_positions" id="position-select">
     <option value="">-</option>
     <optgroup *ngFor="let group of getPlayerPositionEntries()" [label]="group[0]">
       <option *ngFor="let position of group[1]" [value]="position">{{ position }}</option>
@@ -39,7 +34,7 @@
   </select>
 
   <button class="search-btn" type="button" (click)="onSearch()">
-    Search
-    <i class="material-icons">search</i>
+    Filter
+    <i class="material-icons">filter_alt</i>
   </button>
 </form>
