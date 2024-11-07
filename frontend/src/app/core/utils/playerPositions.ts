@@ -1,6 +1,6 @@
 export const playerPositions = {
   Goalkeeper: ['GK'],
-  Defense: ['DF', 'CB', 'RB', 'LB', 'RWB', 'LWB'],
-  Midfield: ['MF', 'CM', 'CDM', 'CAM', 'RM', 'LM'],
-  Forward: ['FW', 'ST', 'CF', 'RW', 'LW', 'SW']
+  Defense: ['LB','CB','RB', 'LWB','RWB'],
+  Midfield: ['CDM','CM','CAM','RM','LM'],
+  Forward: ['LW','ST','CF','RW']
 };
