@@ -29,7 +29,7 @@ export class PlayersFilterComponent {
   ) {
 
     this.filterForm = new FormGroup({
-      player_position: new FormControl(''),
+      player_positions: new FormControl(''),
       club_name: new FormControl(''),
       nationality_name: new FormControl(''),
       fifa_version: new FormControl('')
