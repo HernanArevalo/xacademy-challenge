@@ -58,5 +58,5 @@
     </li>
   </ul>
   <span *ngIf="players!.length == 0" style='text-align: center;'>No results :(</span>
-  <button class="load-btn" type='button'>Load</button>
+  <button class="load-btn" type='button' (click)="loadMorePlayers()" >Load</button>
 </div>

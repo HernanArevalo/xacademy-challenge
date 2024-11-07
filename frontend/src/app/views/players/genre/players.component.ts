@@ -65,6 +65,19 @@ export class PlayersComponent implements OnInit, OnDestroy {
       }
     });
   }
+
+  loadMorePlayers(){
+    this.playerService.getPlayers(this.genre, this.limit+20, this.page, this.otherParams).subscribe({
+      next: res => {
+        this.players.push(...res.players)
+        this.page += 1
+      },
+      error: err => {
+        console.warn('Something went wrong', err);
+      }
+    });
+  }
+
   getOverallGradientColor(overall: number): string {
     const hue = Math.min(120, Math.max(0, (overall - 60) * (120 / 40)));
     return `hsl(${hue}, 80%, 50%)`;
