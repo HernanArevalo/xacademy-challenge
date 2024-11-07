@@ -65,7 +65,7 @@ ul{
 }
 
 .player-item:hover{
-  background-color: #eeeeee;
+  background-color: var(--light-gray);
 
 }
 
@@ -78,11 +78,11 @@ ul{
 }
 
 .navbar-item:hover{
-  background-color: #eeeeee;
+  background-color: var(--light-gray);
 }
 
 .search-div{
-  background-color: #eeeeee;
+  background-color: var(--light-gray);
   padding: 10px;
   border-radius: 10px;
   display: flex;
@@ -121,7 +121,7 @@ input:focus{
 }
 
 .login:hover{
-  background-color: #eeeeee;
+  background-color: var(--light-gray);
 
 }
 
