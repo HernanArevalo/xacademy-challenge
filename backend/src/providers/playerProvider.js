@@ -51,6 +51,11 @@ const getPlayers = async (genre, page = 1, limit = 20, filters) => {
         [Op.like]: `%${filters.player_positions}%`,
       };
     }
+    if (filters.player_position) {
+      whereClause.player_positions = {
+        [Op.like]: `%${filters.player_position}%`,
+      };
+    }
 
     const playerModel = genre === 'female' ? FemalePlayer : MalePlayer;
 
