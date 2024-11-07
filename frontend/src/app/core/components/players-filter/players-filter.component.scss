@@ -17,7 +17,7 @@
 }
 
 label{
-  color: var(--dark-gray);
+  color: var(--black);
   font-size: 18px;
 }
 .data-item > h5{
@@ -54,7 +54,7 @@ select{
   grid-row: 2 / 3;
   color: white;
   background-color: var(--black);
-  padding: 5px 10px;
+  padding: 5px 5px;
   border-radius: 5px;
   outline: none;
   border: none;
