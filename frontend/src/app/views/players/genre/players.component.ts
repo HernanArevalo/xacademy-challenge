@@ -4,12 +4,12 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { Player } from '@/core/models';
 import { PlayerService } from '@/core/services';
-import { PlayersFilterComponent } from '@/core/components';
+import { PlayerListItemComponent, PlayersFilterComponent } from '@/core/components';
 
 @Component({
   selector: 'app-players',
   standalone: true,
-  imports: [ CommonModule, RouterOutlet, RouterLink, RouterLinkActive, PlayersFilterComponent ],
+  imports: [CommonModule, PlayersFilterComponent, PlayerListItemComponent],
   templateUrl: './players.component.html',
   styleUrl: './players.component.scss'
 })

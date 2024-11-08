@@ -1,0 +1,50 @@
+<li>
+  <a
+    [routerLink]="['/players', genre, player!.id]"
+    routerLinkActive="router-link-active"
+    class="player-item"
+  >
+    <div class="player-top">
+      <span
+        class="player-overall"
+         [ngStyle]="{'background-color': overallColor}"
+      >
+        {{ player!.overall }}
+      </span>
+      <h4 class="player-name">
+        {{ player!.long_name }} - <span>20{{ player!.fifa_version }}</span>
+      </h4>
+    </div>
+    <div class="player-info">
+      <div class="player-picture">
+        <img [src]="player!.player_face_url" alt="player-face" />
+      </div>
+      <div class="data-items">
+        <div class="data-item">
+          <span>Position</span>
+          <h5>{{ this.player!.player_positions }}</h5>
+        </div>
+        <div class="data-item">
+          <span>Nationality</span>
+          <h5>{{ this.player!.nationality_name }}</h5>
+        </div>
+        <div class="data-item">
+          <span>Team</span>
+          <h5>{{ this.player!.club_name }}</h5>
+        </div>
+        <div class="data-item age">
+          <span>Age</span>
+          <h5>{{ this.player!.age }}</h5>
+        </div>
+        <div class="data-item">
+          <span>Height</span>
+          <h5>{{ this.player!.height_cm }} cm</h5>
+        </div>
+        <div class="data-item">
+          <span>Weight</span>
+          <h5>{{ this.player!.weight_kg }} kg</h5>
+        </div>
+      </div>
+    </div>
+  </a>
+</li>
