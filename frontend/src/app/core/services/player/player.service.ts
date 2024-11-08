@@ -11,7 +11,7 @@ export class PlayerService {
 
   constructor(private httpClient: HttpClient  ) { }
 
-  getPlayers(genre: string, limit: number, page: number, otherParams: Record<string, any>): Observable<{ ok: boolean; players: Player[] }> {
+  getPlayers(genre: string, limit: number, page: number, otherParams: Record<string, any>): Observable<{ ok: boolean; players: Player[], totalCount: number }> {
     const acceptedKeys = ["club_name", "nationality_name", "fifa_version", "player_positions", "long_name", "overall"];
   
     const paramsFiltered = Object.keys(otherParams)
@@ -23,7 +23,7 @@ export class PlayerService {
   
     const queryParams = new URLSearchParams({ limit: limit.toString(), page: page.toString(), ...paramsFiltered }).toString();
 
-    return this.httpClient.get<{ ok: boolean; players: Player[] }>(`${this.apiUrl}/players/${genre}?${queryParams}`);
+    return this.httpClient.get<{ ok: boolean; players: Player[], totalCount: number }>(`${this.apiUrl}/players/${genre}?${queryParams}`);
   }
   
   getPlayer (genre: string,player_id:number): Observable<{ok:boolean, player:Player}> {
