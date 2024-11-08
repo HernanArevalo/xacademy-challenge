@@ -21,7 +21,12 @@
               class="player-img"
             />
           </div>
-          <span class="number">{{ this.player.overall }}</span>
+          <span
+            class="player-overall"
+            [ngStyle]="{'background-color': overallColor}"
+          >
+          {{ player!.overall }}
+          </span>
         </div>
         <div class="data">
           <h2 class="player-name">{{ this.player.long_name }}</h2>

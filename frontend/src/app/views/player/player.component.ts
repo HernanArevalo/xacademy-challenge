@@ -3,11 +3,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { RadarChartComponent } from '@/core/components';
 import { Player, RadarStats } from '../../core/models';
 import { PlayerService } from '@/core/services';
+import { CommonModule } from '@angular/common';
+import { getOverallGradientColor } from '@/core/utils';
 
 @Component({
   selector: 'app-player',
   standalone: true,
-  imports: [RadarChartComponent],
+  imports: [ RadarChartComponent, CommonModule ],
   templateUrl: './player.component.html',
   styleUrl: './player.component.scss',
 })
@@ -16,6 +18,7 @@ export class PlayerComponent {
   generalStats!: RadarStats;
   attackStats!: RadarStats;
   defenseStats!: RadarStats;
+  overallColor: string|null = null;
 
   genre: string | null = '';
   player_id: string | null = '';
@@ -51,6 +54,8 @@ export class PlayerComponent {
       this.playerService.getPlayer(genre,player_id).subscribe({
         next: res => {
           this.player = res.player
+          this.overallColor = getOverallGradientColor(res.player.overall)
+
         },
         error: err => {
           console.warn('Something went wrong', err);
