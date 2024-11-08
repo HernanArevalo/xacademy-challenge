@@ -7,8 +7,8 @@ router.get("/:genre", async(req, res) => {
   const { page, limit, ...rest } = req.query;
 
   try {
-    const players = await playerService.getPlayers(genre, page, limit, rest)
-    res.status(200).json({ok: true, players})
+    const { players, totalCount } = await playerService.getPlayers(genre, page, limit, rest)
+    res.status(200).json({ok: true, players, totalCount})
     } catch (error) {
     res.status(500).json({ok: false, message: error.message})
   }

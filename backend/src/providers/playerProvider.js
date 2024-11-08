@@ -59,24 +59,16 @@ const getPlayers = async (genre, page = 1, limit = 20, filters) => {
 
     const playerModel = genre === 'female' ? FemalePlayer : MalePlayer;
 
-    const players = await playerModel.findAll({
+    const { count, rows } = await playerModel.findAndCountAll({
       where: whereClause,
-      order: [
-        ['fifa_version', 'DESC'],
-        ['overall', 'DESC'],
-      ],
+      order: [['fifa_version', 'DESC'], ['overall', 'DESC']],
       limit: Number(limit),
-      offset: Number(offset),
+      offset: Number(offset)
     });
 
-    if (!players.length) {
-      throw new Error('Players not found');
-    }
-
-    return players;
+    return { players: rows, totalCount: count };
   } catch (error) {
-    console.error('Error in getPlayers:', error.message);
-    throw new Error('Error retrieving players');
+    throw new Error(error);
   }
 };
 
