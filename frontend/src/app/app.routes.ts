@@ -1,15 +1,18 @@
 import { Routes } from '@angular/router';
-import { PlayersComponent, PlayerComponent } from './views';
+import { PlayersComponent, PlayerComponent, EditPlayerComponent } from './views';
 
 export const routes: Routes = [
   { 
     path: 'players/:genre', 
     component: PlayersComponent,
-    title: `Players | PlayME`
   },
   { 
     path: 'players/:genre/:player_id', 
     component: PlayerComponent
+  },
+  { 
+    path: 'players/:genre/:player_id/edit', 
+    component: EditPlayerComponent
   },
   { 
     path: '', 
