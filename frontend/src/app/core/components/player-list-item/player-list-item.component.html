@@ -12,7 +12,7 @@
         {{ player!.overall }}
       </span>
       <h4 class="player-name">
-        {{ player!.long_name }} - <span>20{{ player!.fifa_version }}</span>
+        {{ player!.long_name }} - <span>20{{ player!.fifa_version }} <small>(v{{player?.fifa_update}})</small></span>
       </h4>
     </div>
     <div class="player-info">
@@ -30,7 +30,7 @@
         </div>
         <div class="data-item">
           <span>Team</span>
-          <h5>{{ this.player!.club_name }}</h5>
+          <h5>{{ this.player?.club_name || '-'}}</h5>
         </div>
         <div class="data-item age">
           <span>Age</span>
