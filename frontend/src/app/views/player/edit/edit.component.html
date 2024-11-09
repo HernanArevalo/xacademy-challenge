@@ -1,0 +1,176 @@
+<div class="player-container">
+  <div class="header-section">
+    <h2 class="overview-title">EDIT PLAYER</h2>
+
+    <button class="header-button" (click)="savePlayer()">
+      Save Player 
+      <i class="material-icons">save</i>
+    </button>
+  </div>
+
+  <form class="general-information" [formGroup]="editPlayerForm" >
+    <div class="stats personal-information">
+      <div class="picture-and-number">
+        <div class="picture">
+          <img
+            [src]="player.player_face_url"
+            alt="player-picture"
+            class="player-img"
+          />
+        </div>
+        <input
+          class="player-overall"
+          [ngStyle]="{ 'background-color': overallColor }"
+          formControlName="overall"
+          type="number"
+          min='1'
+          max='99'
+        />
+      </div>
+      <div class="data">
+        <input type='text' class="player-name" formControlName="long_name" />
+        <div class='version'>
+          20<input type="number" formControlName="fifa_version" class='input-number fifa_version' />
+        </div>
+
+        <div class="data-items">
+
+          <div class="data-item">
+            <label>CLUB</label>
+            <div>
+              <select formControlName="club_name" title='club_name' class='select'>
+                <option *ngFor="let club of clubs" [value]="club">{{club}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="data-item">
+            <label>NATIONALITY</label>
+            <div>
+              <select formControlName="nationality_name" class='select' title='nationality_name'>
+                <option *ngFor="let nation of nations"  [value]="nation">{{nation}}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="data-item">
+            <label>POSITION</label>
+          
+            <div>
+              <select formControlName="player_positions" id="position-select" class='select position-select'>
+                <optgroup *ngFor="let group of getPlayerPositionEntries()" [label]="group[0]">
+                  <option *ngFor="let position of group[1]" [value]="position">{{ position }}</option>
+                </optgroup>
+              </select>
+            </div>
+          </div>
+          
+          
+
+          <div class="data-item">
+            <label>AGE</label>
+            <div>
+              <input type="number" formControlName='age' class='input-number' min='1' max='100' />
+
+            </div>
+          </div>
+
+          <div class="data-item">
+            <label>HEIGHT</label>
+            <div>
+              <input type="number" formControlName='height_cm' class='input-number' min='1' max='220' /> cm
+            </div>
+          </div>
+          <div class="data-item">
+            <label>WEIGHT</label>
+            <div><input type="number" formControlName='weight_kg' class='input-number' min='1' max='220' /> kg</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="stats general-stats">
+      <h4>GENERAL</h4>
+      <div class='stats-grid'>
+        <div class="data-item">
+          <label>PACE</label>
+            <input type="number" formControlName='pace' class='input-number performance' min='1' max='99' />
+        </div>
+        <div class="data-item">
+          <label>SHOOTING</label>
+          <input type="number" formControlName='shooting' class='input-number performance' min='1' max='99' />
+        </div>
+
+        <div class="data-item">
+          <label>PASSING</label>
+          <input type="number" formControlName='passing' class='input-number performance' min='1' max='99' />
+        </div>
+        <div class="data-item">
+          <label>DRIBBLING</label>
+          <input type="number" formControlName='dribbling' class='input-number performance' min='1' max='99' />
+        </div>
+
+        <div class="data-item">
+          <label>PHYSIC</label>
+          <input type="number" formControlName='physic' class='input-number performance' min='1' max='99' />
+        </div>
+
+      </div>
+
+    </div>
+    <div class="stats attack-stats">
+      <h4>ATTACK</h4>
+      <div class='stats-grid'>
+        <div class="data-item">
+          <label>CROSSING</label>
+          <input type="number" formControlName='attacking_crossing' class='input-number performance' min='1' max='99' />
+        </div>
+        <div class="data-item">
+          <label>FINISHING</label>
+          <input type="number" formControlName='attacking_finishing' class='input-number performance' min='1' max='99' />
+        </div>
+
+        <div class="data-item">
+          <label>VOLLEYS</label>
+          <input type="number" formControlName='attacking_volleys' class='input-number performance' min='1' max='99' />
+        </div>
+        <div class="data-item">
+          <label>DRIBBLING</label>
+          <input type="number" formControlName='skill_dribbling' class='input-number performance' min='1' max='99' />
+        </div>
+
+        <div class="data-item">
+          <label>AGILITY</label>
+          <input type="number" formControlName='movement_agility' class='input-number performance' min='1' max='99' />
+        </div>
+
+      </div>
+    </div>
+    <div class="stats defense-stats">
+      <h4>DEFENSE</h4>
+      <div class='stats-grid'>
+        <div class="data-item">
+          <label>DEFENDING</label>
+          <input type="number" formControlName='defending' class='input-number performance' min='1' max='99' />
+        </div>
+        <div class="data-item">
+          <label>STANDING TACKLE</label>
+          <input type="number" formControlName='defending_standing_tackle' class='input-number performance' min='1' max='99' />
+        </div>
+
+        <div class="data-item">
+          <label>SLIDING TACKLE</label>
+          <input type="number" formControlName='defending_sliding_tackle' class='input-number performance' min='1' max='99' />
+        </div>
+        <div class="data-item">
+          <label>MPOSITIONING</label>
+          <input type="number" formControlName='mentality_positioning' class='input-number performance' min='1' max='99' />
+        </div>
+
+        <div class="data-item">
+          <label>INTERCEPTIONS</label>
+          <input type="number" formControlName='mentality_interceptions' class='input-number performance' min='1' max='99' />
+        </div>
+
+      </div>
+    </div> 
+  </form>
+</div>
