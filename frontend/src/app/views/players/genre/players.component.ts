@@ -1,11 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Player } from '@/core/models';
 import { PlayerService } from '@/core/services';
 import { PlayerListItemComponent, PlayersFilterComponent } from '@/core/components';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-players',
@@ -32,7 +33,8 @@ export class PlayersComponent implements OnInit, OnDestroy {
     private playerService: PlayerService,
     private route: ActivatedRoute,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private titleService: Title
   ) {
     this.filterForm = this.fb.group({
       club_name: [''],
@@ -43,14 +45,12 @@ export class PlayersComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    // Suscripción a los parámetros de la ruta
     this.subscription.add(
       this.route.paramMap.subscribe(params => {
         this.genre = params.get('genre') || '';
         if (!['male', 'female'].includes(this.genre)) {
           this.router.navigate(['/players/male']);
         } else {
-          // Suscripción a los parámetros de la consulta
           this.subscription.add(
             this.route.queryParamMap.subscribe(queryParams => {
               this.limit = +queryParams.get('limit')! || this.limit;
@@ -68,15 +68,12 @@ export class PlayersComponent implements OnInit, OnDestroy {
       })
     );
 
-    // Escuchar los cambios del formulario y ejecutar la búsqueda
     this.filterForm.valueChanges.subscribe(() => {
       console.log('form');
       this.onSearch();
     });
   }
 
-
-  // Método para realizar la búsqueda
   onSearch() {
     const queryParams = Object.entries(this.filterForm.value)
       .reduce((params, [key, value]) => {
@@ -86,13 +83,12 @@ export class PlayersComponent implements OnInit, OnDestroy {
         return params;
       }, {} as { [key: string]: any });
 
-    // Navegar con los nuevos parámetros de consulta
     this.router.navigate(['/players', this.genre], { queryParams });
   }
 
-  // Método para cargar los jugadores
   loadPlayers() {
     this.isLoading = true;
+    this.titleService.setTitle(`${this.genre.charAt(0).toUpperCase()+this.genre.slice(1).toLowerCase()} Players | PlayME`);
     this.playerService.getPlayers(this.genre, this.limit, this.page, this.otherParams).subscribe({
       next: res => {
         this.players = res.players;
@@ -107,7 +103,6 @@ export class PlayersComponent implements OnInit, OnDestroy {
     });
   }
 
-  // Método para cargar más jugadores
   loadMorePlayers() {
     if (this.isLoading) return;
     this.isLoading = true;
@@ -125,12 +120,10 @@ export class PlayersComponent implements OnInit, OnDestroy {
     });
   }
 
-  // Método para verificar si los parámetros adicionales están vacíos
   isOtherParamsEmpty(): boolean {
     return Object.keys(this.otherParams).length === 0;
   }
 
-  // Liberar las suscripciones al destruir el componente
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }

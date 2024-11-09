@@ -1,23 +1,24 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { RadarChartComponent } from '@/core/components';
-import { Player, RadarStats } from '../../core/models';
-import { PlayerService } from '@/core/services';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute, Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { RadarChartComponent } from '@/core/components';
+import { Player, RadarStats } from '@/core/models';
+import { PlayerService } from '@/core/services';
 import { getOverallGradientColor } from '@/core/utils';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-player',
   standalone: true,
-  imports: [ RadarChartComponent, CommonModule ],
+  imports: [ RadarChartComponent, CommonModule, RouterLink, RouterLinkActive ],
   templateUrl: './player.component.html',
   styleUrl: './player.component.scss',
 })
-export class PlayerComponent {
+export class PlayerComponent implements OnInit {
+  title = 'das';
+
   player = {} as Player;
-  generalStats!: RadarStats;
-  attackStats!: RadarStats;
-  defenseStats!: RadarStats;
+  stats = {} as RadarStats;
   overallColor: string|null = null;
 
   genre: string | null = '';
@@ -27,7 +28,8 @@ export class PlayerComponent {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private playerService: PlayerService
+    private playerService: PlayerService,
+    private titleService: Title,
   ) {}
 
   ngOnInit() {
@@ -46,50 +48,84 @@ export class PlayerComponent {
       } else {
         this.loadPlayer(this.genre,Number(this.player_id));
       }
+    });
 
+    
+  }
+  
+  loadPlayer(genre: string, player_id: number) {
+    this.playerService.getPlayer(genre, player_id).subscribe({
+      next: res => {
+        this.player = res.player;
+        this.player.player_positions = res.player.player_positions.split(',')[0]
+        this.overallColor = getOverallGradientColor(res.player.overall);
+  
+        const newStats = {
+        generalStats: {
+          name: 'GENERAL',
+          color: 'rgba(0, 255, 0, 0.5)',
+          labels: [
+            "PACE",
+            "SHOOTING",
+            "PASSING",
+            "DRIBBLING",
+            "DEFENDING",
+            "PHYSICAL",
+          ],
+          stats: [
+            this.player.pace,
+            this.player.shooting,
+            this.player.passing,
+            this.player.dribbling,
+            this.player.defending,
+            this.player.physic
+          ],
+        },
+        attackStats: {
+          name: 'ATTACK',
+          color: 'rgba(255, 0, 0, 0.5)',
+          labels: [
+            "CROSSING",
+            "FINISHING",
+            "VOLLEYS",
+            "DRIBBLING",
+            "AGILITY"
+          ],
+          stats: [
+            this.player.attacking_crossing,
+            this.player.attacking_finishing,
+            this.player.attacking_volleys,
+            this.player.skill_dribbling,
+            this.player.movement_agility
+          ]
+        },
+        defenseStats: {
+          name: 'DEFENSE',
+          color: 'rgba(0, 0, 255, 0.5)',
+          labels: [
+            "DEFENDING",
+            "STANDING TACKLE",
+            "SLIDING TACKLE",
+            "POSITIONING",
+            "INTERCEPTIONS"
+          ],
+          stats: [
+            this.player.defending,
+            this.player.defending_standing_tackle,
+            this.player.defending_sliding_tackle,
+            this.player.mentality_positioning,
+            this.player.mentality_interceptions
+          ]
+        }}
+  
+        this.stats = newStats;
+        this.titleService.setTitle(`${this.player.long_name} | PlayME`);
+      },
+      error: err => {
+        console.warn('Something went wrong', err);
+      },
+      complete: () => {}
     });
   }
-
-    loadPlayer(genre: string,player_id:number) {
-      this.playerService.getPlayer(genre,player_id).subscribe({
-        next: res => {
-          this.player = res.player
-          this.overallColor = getOverallGradientColor(res.player.overall)
-
-        },
-        error: err => {
-          console.warn('Something went wrong', err);
-        },
-        complete: () => {
-        }
-      });
-
-    this.generalStats = {
-      name: 'GENERAL',
-      color: 'rgba(0, 255, 0, 1)',
-      stats: {
-        PACE: this.player.pace || 0,
-        SHOOTING: this.player.shooting || 0,
-        PASSING: this.player.passing || 0,
-        DRIBBLING: this.player.dribbling || 0,
-        DEFENDING: this.player.defending || 0,
-        PHYSICAL: this.player.physic || 0,
-      },
-    };
-    this.attackStats = {
-      name: 'GENERAL',
-      color: 'rgba(255, 0, 0, 1)',
-      stats: {}
-    }
-    this.defenseStats = {
-      name: 'GENERAL',
-      color: 'rgba(255, 0, 0, 1)',
-      stats: {
-      DEFENDING: this.player.defending || 0,
-      DEFENDING_STANDING_TACKLE: this.player.defending_standing_tackle || 0,
-      DEFENDING_SLIDING_TACKLE: this.player.defending_sliding_tackle || 0,
-      DEFENDING_MARKING: this.player.defending_marking || 0,
-      INTERCEPTIONS: this.player.mentality_interceptions || 0}
-    }
-  }
+  
 }
