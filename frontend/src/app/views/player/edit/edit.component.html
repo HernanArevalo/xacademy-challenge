@@ -14,6 +14,7 @@
         <div class="picture">
           <img
             [src]="player.player_face_url"
+            (error)="onImageError($event)"
             alt="player-picture"
             class="player-img"
           />
@@ -91,27 +92,28 @@
       <h4>GENERAL</h4>
       <div class='stats-grid'>
         <div class="data-item">
+          <label>PHYSIC</label>
+          <input type="number" formControlName='physic' class='input-number performance' min='1' max='99' />
+        </div>
+        <div class="data-item">
           <label>PACE</label>
             <input type="number" formControlName='pace' class='input-number performance' min='1' max='99' />
-        </div>
-        <div class="data-item">
-          <label>SHOOTING</label>
-          <input type="number" formControlName='shooting' class='input-number performance' min='1' max='99' />
-        </div>
-
-        <div class="data-item">
-          <label>PASSING</label>
-          <input type="number" formControlName='passing' class='input-number performance' min='1' max='99' />
         </div>
         <div class="data-item">
           <label>DRIBBLING</label>
           <input type="number" formControlName='dribbling' class='input-number performance' min='1' max='99' />
         </div>
-
         <div class="data-item">
-          <label>PHYSIC</label>
-          <input type="number" formControlName='physic' class='input-number performance' min='1' max='99' />
+          <label>SHOOTING</label>
+          <input type="number" formControlName='shooting' class='input-number performance' min='1' max='99' />
         </div>
+        <div class="data-item">
+          <label>PASSING</label>
+          <input type="number" formControlName='passing' class='input-number performance' min='1' max='99' />
+        </div>
+
+
+
 
       </div>
 
@@ -120,27 +122,28 @@
       <h4>ATTACK</h4>
       <div class='stats-grid'>
         <div class="data-item">
+          <label>AGILITY</label>
+          <input type="number" formControlName='movement_agility' class='input-number performance' min='1' max='99' />
+        </div>
+        <div class="data-item">
           <label>CROSSING</label>
           <input type="number" formControlName='attacking_crossing' class='input-number performance' min='1' max='99' />
-        </div>
-        <div class="data-item">
-          <label>FINISHING</label>
-          <input type="number" formControlName='attacking_finishing' class='input-number performance' min='1' max='99' />
-        </div>
-
-        <div class="data-item">
-          <label>VOLLEYS</label>
-          <input type="number" formControlName='attacking_volleys' class='input-number performance' min='1' max='99' />
         </div>
         <div class="data-item">
           <label>DRIBBLING</label>
           <input type="number" formControlName='skill_dribbling' class='input-number performance' min='1' max='99' />
         </div>
-
         <div class="data-item">
-          <label>AGILITY</label>
-          <input type="number" formControlName='movement_agility' class='input-number performance' min='1' max='99' />
+          <label>FINISHING</label>
+          <input type="number" formControlName='attacking_finishing' class='input-number performance' min='1' max='99' />
         </div>
+        <div class="data-item">
+          <label>VOLLEYS</label>
+          <input type="number" formControlName='attacking_volleys' class='input-number performance' min='1' max='99' />
+        </div>
+
+
+
 
       </div>
     </div>
@@ -148,27 +151,28 @@
       <h4>DEFENSE</h4>
       <div class='stats-grid'>
         <div class="data-item">
+          <label>INTERCEPTIONS</label>
+          <input type="number" formControlName='mentality_interceptions' class='input-number performance' min='1' max='99' />
+        </div>
+        <div class="data-item">
           <label>DEFENDING</label>
           <input type="number" formControlName='defending' class='input-number performance' min='1' max='99' />
+        </div>
+        <div class="data-item">
+          <label>POSITIONING</label>
+          <input type="number" formControlName='mentality_positioning' class='input-number performance' min='1' max='99' />
         </div>
         <div class="data-item">
           <label>STANDING TACKLE</label>
           <input type="number" formControlName='defending_standing_tackle' class='input-number performance' min='1' max='99' />
         </div>
-
         <div class="data-item">
           <label>SLIDING TACKLE</label>
           <input type="number" formControlName='defending_sliding_tackle' class='input-number performance' min='1' max='99' />
         </div>
-        <div class="data-item">
-          <label>MPOSITIONING</label>
-          <input type="number" formControlName='mentality_positioning' class='input-number performance' min='1' max='99' />
-        </div>
 
-        <div class="data-item">
-          <label>INTERCEPTIONS</label>
-          <input type="number" formControlName='mentality_interceptions' class='input-number performance' min='1' max='99' />
-        </div>
+
+
 
       </div>
     </div> 

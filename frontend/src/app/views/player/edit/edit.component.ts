@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { Player } from '@/core/models';
 import { PlayerService } from '@/core/services';
-import { getOverallGradientColor, allPlayerPositions, playerPositions } from '@/core/utils';
+import { errorSwal, getOverallGradientColor, playerPositions, Toast } from '@/core/utils';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
@@ -115,6 +115,10 @@ export class EditPlayerComponent implements OnInit {
     });
   }
   
+  onImageError(event: Event) {
+    const imgElement = event.target as HTMLImageElement;
+    imgElement.src = 'https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg';
+  }
   loadNationsAndClubs() {
     this.playerService.getClubsList(this.genre!).subscribe({
       next: (res) => {
@@ -137,17 +141,47 @@ export class EditPlayerComponent implements OnInit {
   savePlayer() {
     if (this.editPlayerForm.valid) {
       const updatedPlayer = this.editPlayerForm.value;
-      console.log('Player data to save:', updatedPlayer);
-    } else {
-      // Mostrar errores específicos de cada campo
-      Object.keys(this.editPlayerForm.controls).forEach((controlName) => {
-        const control = this.editPlayerForm.get(controlName);
-        if (control && control.invalid) {
-          console.log(`Errors for ${controlName}:`, control.errors);
+
+      this.playerService.putPlayer(this.genre!, this.player.id, updatedPlayer).subscribe({
+        next: (res) => {
+          Toast({title:'Player saved!', background:'rgb(0,122,0)', icon:'success'})
+          this.router.navigate(['/players',this.genre, this.player.id])
+        },
+        error: (err) => {
+          if (this.player_id == '0') {
+            this.playerService.postPlayer(this.genre!, updatedPlayer).subscribe({
+              next: (res) => {
+                this.router.navigate(['/players',this.genre, this.player.id, 'edit'])
+              },
+              error: (err) => {
+                console.warn('E', err);
+              },
+            })
+          }else{
+            console.warn('Something went wrong', err);
+          }
         }
       });
-  
-      console.log('Form is invalid');
+      this.playerService.getNationsList(this.genre!).subscribe({
+        next: (res) => {
+          this.nations = res.nations;
+        },
+        error: (err) => {
+          console.warn('Something went wrong', err);
+        },
+      });
+
+    }else {
+      const errors: { [key: string]: any } = {};
+      
+      Object.keys(this.editPlayerForm.controls).forEach((controlName) => {
+        const control = this.editPlayerForm.get(controlName);
+        if (control && control.invalid && control.errors) {
+          errors[controlName] = control.errors;
+        }
+      });
+    
+      errorSwal(errors);
     }
   }
   

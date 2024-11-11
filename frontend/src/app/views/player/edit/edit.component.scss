@@ -9,7 +9,10 @@
 .player-container{
   width: 90%;
 }
-
+.player-img{
+  width: 120px;
+  height: 120px;
+}
 .header-section{
   width: 100%;
   display: flex;
@@ -152,7 +155,7 @@ input:focus, .overall:focus{
   width: 100%;
   grid-template-columns: repeat(2, auto);
   justify-content: space-between;
-  row-gap: 25px;
+  gap: 25px;
 }
 
 .data-item{
