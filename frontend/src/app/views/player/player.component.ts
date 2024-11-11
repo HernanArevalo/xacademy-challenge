@@ -39,7 +39,7 @@ export class PlayerComponent implements OnInit {
 
 
       if (
-        (this.genre !== 'male' && this.genre !== 'female') 
+        (!['male','female'].includes(this.genre!)) 
         || this.player_id == null 
         || this.genre == null
         || isNaN(Number(this.player_id))
@@ -69,7 +69,6 @@ export class PlayerComponent implements OnInit {
             "SHOOTING",
             "PASSING",
             "DRIBBLING",
-            "DEFENDING",
             "PHYSICAL",
           ],
           stats: [
@@ -77,7 +76,6 @@ export class PlayerComponent implements OnInit {
             this.player.shooting,
             this.player.passing,
             this.player.dribbling,
-            this.player.defending,
             this.player.physic
           ],
         },
@@ -122,7 +120,12 @@ export class PlayerComponent implements OnInit {
         this.titleService.setTitle(`${this.player.long_name} | PlayME`);
       },
       error: err => {
-        console.warn('Something went wrong', err);
+        if (this.player_id == '0') {
+          this.router.navigate(['/players', this.genre, '0', 'edit' ]);
+        }else{
+          console.warn('Something went wrong', err);
+          this.router.navigate(['/players', this.genre]);
+        }
       },
       complete: () => {}
     });
