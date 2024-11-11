@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Player } from '../../models';
+import { Player, PlayerForm } from '../../models';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
@@ -9,9 +9,9 @@ import { HttpClient } from '@angular/common/http';
 export class PlayerService {
   apiUrl = 'http://localhost:8080'
 
-  constructor(private httpClient: HttpClient  ) { }
+  constructor( private httpClient: HttpClient ) { }
 
-  getPlayers(genre: string, limit: number, page: number, otherParams: Record<string, any>): Observable<{ ok: boolean; players: Player[], totalCount: number }> {
+  getPlayers (genre: string, limit: number, page: number, otherParams: Record<string, any>): Observable<{ ok: boolean; players: Player[], totalCount: number }> {
     const acceptedKeys = ["club_name", "nationality_name", "fifa_version", "player_positions", "long_name", "overall"];
   
     const paramsFiltered = Object.keys(otherParams)
@@ -29,6 +29,12 @@ export class PlayerService {
   getPlayer (genre: string,player_id:number): Observable<{ok:boolean, player:Player}> {
     return this.httpClient.get<{ok:boolean, player:Player}>(`${this.apiUrl}/players/${genre}/${player_id}`)
   }
+  putPlayer (genre: string,player_id:number, playerOptions: PlayerForm): Observable<{ok:boolean, player:Player}> {
+    return this.httpClient.put<{ok:boolean, player:Player}>(`${this.apiUrl}/players/${genre}/${player_id}`, playerOptions)
+  }
+  postPlayer (genre:string, playerOptions: PlayerForm): Observable<{ok:boolean, player:Player}> {
+    return this.httpClient.put<{ok:boolean, player:Player}>(`${this.apiUrl}/players/${genre}/0`, playerOptions)
+  }
   getClubsList (genre:string): Observable<{ok:boolean, clubs:string[]}> {
     return this.httpClient.get<{ok:boolean, clubs:string[]}>(`${this.apiUrl}/clubs/${genre}`)
   }
@@ -38,10 +44,5 @@ export class PlayerService {
   postFeatures (player:Player): Observable<{message:string}> {
     return this.httpClient.post<{message:string}>(this.apiUrl, player)
   }
-  putFeatures (player:Player): Observable<{message:string}> {
-    return this.httpClient.put<{message:string}>(`${this.apiUrl}/${player.id}`, player)
-  }
-  deleteFeatures (playerId:number): Observable<{message:string}> {
-    return this.httpClient.delete<{message:string}>(`${this.apiUrl}/${playerId}`)
-  }
+
 }
