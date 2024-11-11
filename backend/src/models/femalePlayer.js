@@ -9,23 +9,23 @@ const FemalePlayer = sequelize.define('FemalePlayer', {
   },
   fifa_version: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   fifa_update: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   player_face_url: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   long_name: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   player_positions: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   club_name: {
     type: DataTypes.STRING,
@@ -37,11 +37,11 @@ const FemalePlayer = sequelize.define('FemalePlayer', {
   },
   overall: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+    allowNull: true,
   },
   potential: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+    allowNull: true,
   },
   value_eur: {
     type: DataTypes.INTEGER,
@@ -53,7 +53,7 @@ const FemalePlayer = sequelize.define('FemalePlayer', {
   },
   age: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+    allowNull: true,
   },
   height_cm: {
     type: DataTypes.INTEGER,
