@@ -3,6 +3,7 @@ import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs';
 import { NavbarComponent } from '@/core/components';
 import { CommonModule } from '@angular/common';
+import 'animate.css'
 
 @Component({
   selector: 'app-root',
