@@ -19,4 +19,9 @@ export class PlayerListItemComponent implements OnInit {
   ngOnInit() {
     this.overallColor = getOverallGradientColor(this.player!.overall)
   }
+
+  onImageError(event: Event) {
+    const imgElement = event.target as HTMLImageElement;
+    imgElement.src = 'https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg';
+  }
 }

@@ -17,7 +17,11 @@
     </div>
     <div class="player-info">
       <div class="player-picture">
-        <img [src]="player!.player_face_url" alt="player-face" />
+        <img [src]="player!.player_face_url" 
+             alt="player-face"
+             (error)="onImageError($event)"
+
+             />
       </div>
       <div class="data-items">
         <div class="data-item">
