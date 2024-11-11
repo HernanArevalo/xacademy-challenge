@@ -1,14 +1,5 @@
 const { FemalePlayer, MalePlayer } = require('../models');
-const { Sequelize, where, Op } = require('sequelize');
-
-const createPlayer = async (userOptions) => {
-  try {
-    const newUser = await Player.create(userOptions);
-    return newUser;
-  } catch (error) {
-    throw new Error(error);
-  }
-};
+const { Sequelize, Op } = require('sequelize');
 
 const getPlayer = async (genre, player_id) => {
   try {
@@ -26,6 +17,30 @@ const getPlayer = async (genre, player_id) => {
     } else {
       throw new Error(`User not found`);
     }
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+const updatePlayer = async (id, genre, playerOptions) => {
+  try {
+    const playerModel = genre === 'female' ? FemalePlayer : MalePlayer;
+
+    const res = await playerModel.update(playerOptions, {
+      where: { id },
+      returning: true,
+    });
+    return playerModel.findByPk(id);
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+const createPlayer = async (genre, playerOptions) => {
+  try {
+    const playerModel = genre === 'female' ? FemalePlayer : MalePlayer;
+
+    const newPlayer = await playerModel.create({...playerOptions});
+    return newPlayer;
   } catch (error) {
     throw new Error(error);
   }
@@ -135,33 +150,11 @@ const getNations = async (genre) => {
   }
 };
 
-const updateUser = async (id, userOptions) => {
-  try {
-    await getUser(id);
-    const res = await User.update(userOptions, {
-      where: { id },
-      returning: true,
-    });
-    return User.findByPk(id);
-  } catch (error) {
-    throw new Error(error);
-  }
-};
-
-const deleteUser = async (id) => {
-  try {
-    return await User.destroy({ where: { id } });
-  } catch (error) {
-    throw new Error(error);
-  }
-};
-
 module.exports = {
   createPlayer,
+  updatePlayer,
   getPlayer,
   getPlayers,
   getClubs,
-  getNations,
-  updateUser,
-  deleteUser,
+  getNations
 };
