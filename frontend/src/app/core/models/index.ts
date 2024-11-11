@@ -1,3 +1,5 @@
 export { Player } from './player.model'
 export { RadarStat, RadarStats } from './radar-stats.model'
 export { PlayerForm } from './player-form.model'
+export { LoginForm } from './login-form.model'
+export { RegisterForm } from './register-form.model'
