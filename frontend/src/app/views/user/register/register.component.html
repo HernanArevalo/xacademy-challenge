@@ -1,0 +1,112 @@
+<div class="login-box">
+  <div class="logo">
+    <img src="assets/favicon.ico" alt="Logo" />
+    <span>PlayME</span>
+  </div>
+  <div class="form-box">
+    <h6 class="login-title">Register</h6>
+
+    <form #registerForm="ngForm" class="login-form">
+      <div class="input-div">
+        <div>
+          <div class="input-box">
+            <label for="name">Name:</label>
+            <input
+              type="text"
+              #name="ngModel"
+              [(ngModel)]="formModel.name"
+              name="name"
+              id="name"
+              class="form-control"
+              required
+              minlength="3"
+            />
+          </div>
+          <div
+            *ngIf="name.touched && name.hasError('required')"
+            class="input-message"
+          >
+            Name required
+          </div>
+          <div
+          *ngIf="name.touched && name.value.length < 3 && name.value.length > 0"
+          class="input-message"
+        >
+          Name minlength: 3
+        </div>
+        </div>
+        <div>
+          <div class="input-box">
+            <label for="email">Email:</label>
+            <input
+              type="email"
+              #email="ngModel"
+              type="email"
+              [(ngModel)]="formModel.email"
+              name="email"
+              id="email"
+              class="form-control"
+              required
+              email
+            />
+          </div>
+          <div
+            *ngIf="email.touched && email.hasError('email')"
+            class="input-message"
+          >
+            Insert a valid email
+          </div>
+          <div
+            *ngIf="email.touched && email.hasError('required')"
+            class="input-message"
+          >
+            Email required
+          </div>
+        </div>
+        <div>
+          <div class="input-box">
+            <label for="password">Password:</label>
+            <input
+              type="password"
+              #password="ngModel"
+              [(ngModel)]="formModel.password"
+              name="password"
+              id="password"
+              required
+              password
+              minlength="8"
+            />
+          </div>
+          <div
+          *ngIf="password.touched && password.value.length < 8"
+          class="input-message"
+        >
+          Password minlength: 8
+        </div>
+        <div
+          *ngIf="password.touched && password.hasError('required')"
+          class="input-message"
+        >
+          Password required
+        </div>
+
+        </div>
+      </div>
+
+      <div class="buttons">
+        <button class="btn" (click)="register()" [disabled]="registerForm.invalid">
+          Register
+        </button>
+        <a class="btn"  routerLink="/login" routerLinkActive="router-link-active" >
+          Login
+        </a>
+      </div>
+      <div
+      *ngIf="errorMessage"
+      class="input-message text-center"
+      >
+        {{errorMessage}}
+      </div>
+    </form>
+  </div>
+</div>
