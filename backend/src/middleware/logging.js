@@ -1,7 +1,16 @@
-const logginMdw = (req,res,next)=>{
-  console.log(`Se hizo un request a la URL ${req.url}`);
-  res.setHeader("Content-Type", "Application/json");
-  next();
-}
+const jwt = require('jsonwebtoken');
 
-module.exports = logginMdw
+const authenticateToken = (req, res, next) => {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+
+  if (!token) return res.sendStatus(403);
+
+  jwt.verify(token, 'secret_key', (err, user) => {
+    if (err) return res.sendStatus(403);
+    req.user = user;
+    next();
+  });
+};
+
+module.exports = authenticateToken;

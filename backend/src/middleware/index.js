@@ -1,3 +1,3 @@
-const logging = require('./logging')
+const authenticateToken = require('./logging')
 
-module.exports = { logging }
+module.exports = { authenticateToken }
