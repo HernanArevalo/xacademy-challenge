@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<h1>Proyecto Backend - xacademy-challenge</h1>
+<h1>Parte Frontend - xAcademy-challenge</h1>
 
 <p>Este proyecto es el backend para la gestión de datos de jugadores de FIFA. Sigue los siguientes pasos para configurarlo en tu entorno de desarrollo.</p>
 
@@ -21,8 +21,8 @@
 
 <ol>
   <li><strong>Clona el repositorio</strong>:
-    <pre><code>git clone https://github.com/HernanArevalo/xacademy-backend
-cd xacademy-backend
+    <pre><code>git clone https://github.com/HernanArevalo/xacademy-challenge
+cd xacademy-backend/backend
     </code></pre>
   </li>
 
@@ -44,9 +44,12 @@ cd xacademy-backend
 
   <li><strong>Carga los datos iniciales de los jugadores</strong>:
     <ul>
-      <li>Desde el directorio raíz del proyecto, ejecuta:
+      <li>Desde el directorio del backend, ejecuta:
         <pre><code>docker exec -i xacademy-challenge mysql -uroot -proot fifa_local &lt; ./src/database/fifa_male_players.sql
-docker exec -i xacademy-challenge mysql -uroot -proot fifa_local &lt; ./src/database/fifa_female_players.sql</code></pre>
+docker exec -i xacademy-challenge mysql -uroot -proot fifa_local &lt; ./src/database/fifa_female_players.sql
+docker exec -i xacademy-challenge mysql -uroot -proot fifa_local &lt; ./src/database/users.sql
+
+</code></pre>
       </li>
     </ul>
   </li>
