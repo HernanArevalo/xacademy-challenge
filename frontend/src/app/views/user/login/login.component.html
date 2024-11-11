@@ -1,0 +1,83 @@
+<div class="login-box">
+  <div class="logo">
+    <img src="assets/favicon.ico" alt="Logo" />
+    <span>PlayME</span>
+  </div>
+  <div class="form-box">
+    <h6 class="login-title">Login</h6>
+
+    <form #loginForm="ngForm" class="login-form">
+      <div class="input-div">
+        <div>
+          <div class="input-box">
+            <label for="email">Email:</label>
+            <input
+              type="email"
+              #email="ngModel"
+              type="email"
+              name="email"
+              id="email"
+              class="form-control"
+              [(ngModel)]="formModel.email"
+              required
+              email
+            />
+          </div>
+          <div
+            *ngIf="email.touched && email.hasError('email')"
+            class="input-message"
+          >
+            Insert a valid email
+          </div>
+          <div
+            *ngIf="email.touched && email.hasError('required')"
+            class="input-message"
+          >
+            Email required
+          </div>
+        </div>
+        <div>
+          <div class="input-box">
+            <label for="password">Password:</label>
+            <input
+              type="password"
+              #password="ngModel"
+              name="password"
+              id="password"
+              [(ngModel)]="formModel.password"
+              required
+              password
+              minlength="8"
+            />
+          </div>
+          <div
+          *ngIf="password.touched && password.value.length < 8"
+          class="input-message"
+        >
+          Password minlength: 8
+        </div>
+        <div
+          *ngIf="password.touched && password.hasError('required')"
+          class="input-message"
+        >
+          Password required
+        </div>
+
+        </div>
+      </div>
+
+      <div class="buttons">
+        <button class="btn" (click)="login()" [disabled]="loginForm.invalid">
+          Login
+        </button>
+        <a class="btn"  routerLink="/register" routerLinkActive="router-link-active" >Register</a>
+      </div>
+      <div
+      *ngIf="errorMessage"
+      class="input-message text-center"
+      >
+        {{errorMessage}}
+      </div>
+    </form>
+  </div>
+</div>
