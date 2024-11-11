@@ -22,6 +22,7 @@
         <div class="picture">
           <img
             [src]="player.player_face_url"
+            (error)="onImageError($event)"
             alt="player-picture"
             class="player-img"
           />
