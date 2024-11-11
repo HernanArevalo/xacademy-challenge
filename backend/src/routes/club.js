@@ -1,8 +1,9 @@
 const express = require('express')
-const { playerService } = require('../services')
+const { playerService } = require('../services');
+const { authenticateToken } = require('../middleware');
 const router = express.Router();
 
-router.get("/:genre", async(req, res) => {
+router.get("/:genre", authenticateToken, async(req, res) => {
   const genre = req.params.genre;
   const { page, limit } = req.query;
 

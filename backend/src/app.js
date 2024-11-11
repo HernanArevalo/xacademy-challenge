@@ -2,9 +2,7 @@ const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser');
 
-const { logging } = require('./middleware');
-const { playersRouter, clubsRouter, nationsRouter } = require('./routes');
-// const { initializeDB } = require('./config/dbConfig');
+const { clubRouter, nationRouter, playerRouter, userRouter } = require('./routes');
 
 const PORT = 8080
 
@@ -14,11 +12,11 @@ app.use(cors(
 ));
 
 app.use(bodyParser.json());
-app.use(logging);
 
-app.use("/players", playersRouter);
-app.use("/clubs", clubsRouter);
-app.use("/nations", nationsRouter);
+app.use("/players", playerRouter);
+app.use("/clubs", clubRouter);
+app.use("/nations", nationRouter);
+app.use("/user", userRouter);
 
 (async () => {
   // await initializeDB();
