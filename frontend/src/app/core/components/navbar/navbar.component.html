@@ -1,78 +1,71 @@
 <div class="navbar">
   <nav>
-    <img src="assets/favicon.ico" alt="Logo" class="logo" />
-    <ul>
-      <!-- <li class="navbar-item">
-        <div class="item-title">
-          BEST PLAYERS
-          <i class="material-icons">arrow_drop_down</i>
-        </div>
-        <div class='player-list'>
-          <div class='player-item'>LIONEL MESSI</div>
-          <div class='player-item'>CRISTIANO RONALDO</div>
-        </div>
-      </li> -->
-      <li class="navbar-item">
-        <a routerLink="/players/male" routerLinkActive="router-link-active" >
-          <div class="item-title">
-            MALE PLAYERS
-            <i class="material-icons">arrow_drop_down</i>
+    <div>
+      <img src="assets/favicon.ico" alt="Logo" class="logo" />
+      <ul>
+        <li class="navbar-item">
+          <a routerLink="/players/male" routerLinkActive="router-link-active" >
+            <div class="item-title">
+              MALE PLAYERS
+              <i class="material-icons">arrow_drop_down</i>
+            </div>
+          </a>
+          
+          <div class='player-list'>
+            <a routerLink="/players/male/143051" routerLinkActive="router-link-active" >
+              <div class='player-item'>LIONEL MESSI</div>
+            </a>
+            <a routerLink="/players/male/143056" routerLinkActive="router-link-active" >
+              <div class='player-item'>CRISTIANO RONALDO</div>
+            </a>
+            <a routerLink="/players/male/143055" routerLinkActive="router-link-active" >
+              <div class='player-item'>KYLIAN MBAPPÉ</div>
+            </a>
+            <a routerLink="/players/male/143061" routerLinkActive="router-link-active" >
+              <div class='player-item'>NEYMAR JR</div>
+            </a>
           </div>
-        </a>
-        
-        <div class='player-list'>
-          <a routerLink="/players/male/143051" routerLinkActive="router-link-active" >
-            <div class='player-item'>LIONEL MESSI</div>
+        </li>
+        <li class="navbar-item">
+          <a routerLink="/players/female" routerLinkActive="router-link-active" >
+            <div class="item-title">
+              FEMALE PLAYERS
+              <i class="material-icons">arrow_drop_down</i>
+            </div>
           </a>
-          <a routerLink="/players/male/143056" routerLinkActive="router-link-active" >
-            <div class='player-item'>CRISTIANO RONALDO</div>
-          </a>
-          <a routerLink="/players/male/143055" routerLinkActive="router-link-active" >
-            <div class='player-item'>KYLIAN MBAPPÉ</div>
-          </a>
-          <a routerLink="/players/male/143061" routerLinkActive="router-link-active" >
-            <div class='player-item'>NEYMAR JR</div>
-          </a>
-        </div>
-      </li>
-      <li class="navbar-item">
-        <a routerLink="/players/female" routerLinkActive="router-link-active" >
-          <div class="item-title">
-            FEMALE PLAYERS
-            <i class="material-icons">arrow_drop_down</i>
+  
+          <div class='player-list'>
+            <a routerLink="/players/female/6609" routerLinkActive="router-link-active" >
+              <div class='player-item'>ALEXIA PUTELLAS</div>
+            </a>
+            <a routerLink="/players/female/2493" routerLinkActive="router-link-active" >
+              <div class='player-item'>SAMANTHA KERR</div>
+            </a>
+            <a routerLink="/players/female/5800" routerLinkActive="router-link-active" >
+              <div class='player-item'>CAROLINE HANSEN</div>
+            </a>
+            <a routerLink="/players/female/232" routerLinkActive="router-link-active" >
+              <div class='player-item'>ESTEFANÍA BANINI</div>
+            </a>
           </div>
-        </a>
-
-        <div class='player-list'>
-          <a routerLink="/players/female/6609" routerLinkActive="router-link-active" >
-            <div class='player-item'>ALEXIA PUTELLAS</div>
-          </a>
-          <a routerLink="/players/female/2493" routerLinkActive="router-link-active" >
-            <div class='player-item'>SAMANTHA KERR</div>
-          </a>
-          <a routerLink="/players/female/5800" routerLinkActive="router-link-active" >
-            <div class='player-item'>CAROLINE HANSEN</div>
-          </a>
-          <a routerLink="/players/female/232" routerLinkActive="router-link-active" >
-            <div class='player-item'>ESTEFANÍA BANINI</div>
-          </a>
-        </div>
-      </li>
-      <li class="navbar-item">
-        <a routerLink="/players/female" routerLinkActive="router-link-active" >
-          <div class="item-title my-player" style='height: 24px;'>
-            MY PLAYER
-          </div>
-        </a>
-      </li>
-    </ul>
-
-    <div class="search-div">
-      <input type="text" class="search-pj-input" placeholder="Search" />
-      <i class="material-icons search-icon">search</i>
+        </li>
+      </ul>
     </div>
-    <div class="login">
-      <i class="material-icons">logout</i>
+
+    <div class='right-nav'>
+      <a *ngIf="malePlayerId" [routerLink]="['/players/male', malePlayerId]">
+        <span class="item-title my-player">
+          MY MALE PLAYER
+        </span>
+      </a>
+      <a *ngIf="femalePlayerId" [routerLink]="['/players/female', femalePlayerId]">
+        <span class="item-title my-player">
+          MY FEMALE PLAYER
+        </span>
+      </a>
+      <div class="login" (click)="logout()">
+        <i class="material-icons">logout</i>
+      </div>
     </div>
   </nav>
 </div>
