@@ -16,6 +16,7 @@
     
     <span *ngIf="players.length === 0" style='text-align: center;'>No results :(</span>
     <button class="load-btn" type='button' *ngIf="hasMore" [disabled]="isLoading" (click)="loadMorePlayers()">Load More</button>
+    <button class="download-btn" type='button' *ngIf="players.length > 0 && !isLoading" [disabled]="isLoading" (click)="downloadAllPlayers()">Download as csv file</button>
   </div>
 
   <div class='loader-container' *ngIf="isLoading">

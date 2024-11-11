@@ -60,7 +60,6 @@ export class PlayersComponent implements OnInit, OnDestroy {
                 Array.from(queryParams.keys).map(key => [key, queryParams.get(key)]).filter(([_, value]) => value !== null)
               );
               this.otherParams = otherParams;
-
               this.loadPlayers();
             })
           );
@@ -69,9 +68,9 @@ export class PlayersComponent implements OnInit, OnDestroy {
     );
 
     this.filterForm.valueChanges.subscribe(() => {
-      console.log('form');
       this.onSearch();
     });
+
   }
 
   onSearch() {
@@ -119,6 +118,34 @@ export class PlayersComponent implements OnInit, OnDestroy {
       }
     });
   }
+
+  downloadAllPlayers() {
+    const csvData = this.convertToCSV(this.players);
+  
+    this.downloadCSV(csvData);
+  }
+  
+  convertToCSV(players: any[]): string {
+    const header = Object.keys(players[0]).join(',');
+    const rows = players.map(player => {
+      return Object.values(player).map(value => {
+
+        return `"${value}"`;
+      }).join(',');
+    });
+  
+    return [header, ...rows].join('\n');
+  }
+  
+  downloadCSV(csvData: string) {
+    const blob = new Blob([csvData], { type: 'text/csv' });
+  
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'jugadores.csv';
+    link.click();
+  }
+  
 
   isOtherParamsEmpty(): boolean {
     return Object.keys(this.otherParams).length === 0;
