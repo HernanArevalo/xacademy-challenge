@@ -51,18 +51,17 @@
             />
           </div>
           <div
-          *ngIf="password.touched && password.value.length < 8"
-          class="input-message"
-        >
-          Password minlength: 8
-        </div>
-        <div
-          *ngIf="password.touched && password.hasError('required')"
-          class="input-message"
-        >
-          Password required
-        </div>
-
+            *ngIf="password.touched && password.value.length < 8"
+            class="input-message"
+          >
+            Password minlength: 8
+          </div>
+          <div
+            *ngIf="password.touched && password.hasError('required')"
+            class="input-message"
+          >
+            Password required
+          </div>
         </div>
       </div>
 
@@ -70,13 +69,15 @@
         <button class="btn" (click)="login()" [disabled]="loginForm.invalid">
           Login
         </button>
-        <a class="btn"  routerLink="/register" routerLinkActive="router-link-active" >Register</a>
+        <a
+          class="btn"
+          routerLink="/register"
+          routerLinkActive="router-link-active"
+          >Register</a
+        >
       </div>
-      <div
-      *ngIf="errorMessage"
-      class="input-message text-center"
-      >
-        {{errorMessage}}
+      <div *ngIf="errorMessage" class="input-message text-center">
+        {{ errorMessage }}
       </div>
     </form>
   </div>
